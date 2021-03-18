@@ -1,0 +1,171 @@
+; Copyright Hewlett-Packard 2014
+; XPS.PCL6 Printer Drivers
+; List of supported printers, manufacturers
+
+; Manufacturer section.
+; This section lists all of the manufacturers
+; that we will display in the Dialog box
+[Version]
+Signature = "$Windows NT$"
+ClassGUID = {4D36E979-E325-11CE-BFC1-08002BE10318}
+Class = Printer
+Provider = %OEM%
+DriverVer = 05/13/2015,8.01.1320.2917
+CatalogFile = hpne3B2A_x64.cat
+
+[Manufacturer]
+%OEM% = OEM,NTamd64
+
+; Model sections.
+; Each section here corresponds with an entry listed in the
+; [Manufacturer] section, above. The models will be displayed in the order
+; that they appear in the INF file.
+[OEM]
+
+[OEM.NTamd64]
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Coae2d
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Coae2d
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\VID_03F0&PID_3B2A
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\VID_03F0&PID_3B2A&REV_0100
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Coae2d
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co9b28
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co9b28
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co9b28
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co59ab
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co59ab
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co59ab
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co58eb
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co58eb
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co58eb
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co982a
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co982a
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co982a
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co5a6b
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co5a6b
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co5a6b
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co9aaa
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co9aaa
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co9aaa
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co9bea
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co9bea
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co9bea
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co5b2b
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co5b2b
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co5b2b
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co5f6b
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co5f6b
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co5f6b
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Co9faa
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Co9faa
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Co9faa
+%PRINTER1% = INSTALL_SECTION,Hewlett-PackardHP_Coab18
+%PRINTER1% = INSTALL_SECTION,WSDPRINT\Hewlett-PackardHP_Coab18
+%PRINTER1% = INSTALL_SECTION,USBPRINT\Hewlett-PackardHP_Coab18
+
+; Installer Sections
+; These sections control file installation, and reference all files that
+; need to be copied. The section name will be assumed to be the driver
+; file, unless there is an explicit DriverFile section listed.
+[PrinterPackageInstallation.amd64]
+PackageAware = TRUE
+
+; Copy Sections
+; Lists of files that are actually copied. These sections are referenced
+; from the installer sections, above. Only create a section if it contains
+; two or more files (if we only copy a single file, identify it in the
+; installer section, using the @filename notation) or if it's a color
+; profile (since the DestinationDirs can only handle sections, and not
+; individual files).
+[OEM URLS]
+%OEM% = "http://www.hp.com"
+
+[INSTALL_SECTION]
+CopyFiles = COMMON_FILES_DRIVER_COPY,VENDOR_SETUP,MSCORE_COPY
+DriverFile = mxdwdrv.dll
+ConfigFile = hpb6sy2917_x64gui.dll
+DataFile = hpne3B2A_x64Cfg.xml
+FeatureScore = 0x20
+Copyinf = hpbuio140l.inf
+
+[INSTALL_SECTION.CoInstallers]
+AddReg = CoLaunchInstall.AddReg
+CopyFiles = VENDOR_SETUP
+
+[CoLaunchInstall.AddReg]
+HKR,,CoInstallers32,0x10000,"hpbcoinsx64.dll,CoInstall"
+
+[MSCORE_COPY]
+mxdwdrv.dll,mxdwdrv_x64.dll,COPYFLG_NOSKIP
+XPSSVCS.dll,XPSSVCS_x64.dll,COPYFLG_NOSKIP
+
+[VENDOR_SETUP]
+hpbcoinsx64.dll
+
+[InstallData]
+LaunchExe = Autorun.exe
+Params = /HWFirst
+PnPFinishEvent = hpbsta64
+InstallerRunningEvent = hpbcsiInstaller
+IOBackfill = UIO
+
+[SourceInfo]
+SourceDirectory = %1%
+
+; Call SetupSetDirectoryId with 66000 to set the target directory at runtime
+; (depending on which environment drivers are getting installed)
+[COMMON_FILES_DRIVER_COPY]
+hpne3B2Ax64_PipelineConfig.xml
+hpb6sy2917_x64xps.dll
+hpb6sy2917_x64hybrasto.dll
+hpne3B2A_x64Cfg.xml
+hpb6sy2917_x64gui.dll
+hpb6sy2917_x64enus.dll
+hpb6sy2917_x64dlg.dll
+hpb6sy2917_x64help.cab
+hpb6sy2917_x64buio.dll
+hpb6sy2917_x64buiodm.dll
+hpb6sy2917_x64datamap.xml
+hpne3B2A_x64.ini
+hpbcoinsx64.dll
+
+; Data Sections
+; Lists of files that are specially identified for Windows
+[DestinationDirs]
+DefaultDestDir = 66000
+VENDOR_SETUP = 66002
+
+[SourceDisksNames.amd64]
+0 = %DISK%,,,.
+
+; Source Disk Section
+[SourceDisksNames]
+0 = %DISK%,,,.
+
+[SourceDisksFiles]
+mxdwdrv_x64.dll = 0
+XPSSVCS_x64.DLL = 0
+hpne3B2Ax64_PipelineConfig.xml = 0
+hpb6sy2917_x64xps.dll = 0
+hpb6sy2917_x64hybrasto.dll = 0
+hpne3B2A_x64Cfg.xml = 0
+hpb6sy2917_x64gui.dll = 0
+hpb6sy2917_x64enus.dll = 0
+hpb6sy2917_x64dlg.dll = 0
+hpb6sy2917_x64help.cab = 0
+hpb6sy2917_x64buio.dll = 0
+hpb6sy2917_x64buiodm.dll = 0
+hpb6sy2917_x64datamap.xml = 0
+hpne3B2A_x64.ini = 0
+hpbcoinsx64.dll = 0
+hpbuio140l.inf = 0
+
+[Strings]
+OEM = "HP"
+PRINTER1 = "HP Color LaserJet Pro MFP M277 PCL 6"
+DISK = "HP Color LaserJet Pro MFP M277 PCL 6 Printer Drivers Disk"
+
+[Strings.0411]
+OEM = "HP"
+PRINTER1 = "HP Color LaserJet Pro MFP M277 PCL 6"
+DISK = "HP Color LaserJet Pro MFP M277 PCL 6 Printer Drivers Disk"
+
