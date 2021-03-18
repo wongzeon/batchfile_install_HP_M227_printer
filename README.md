@@ -12,8 +12,8 @@
   - 驱动：有对应型号的打印机驱动文件
 
 ### 开始使用
-将bat文件下载下来后，点击`右键`，`编辑`即可编辑源代码
 如果打印机是必备条件中同型号的，则仅需修改`驱动路径`
+将bat和驱动文件下载后，`右键`点击bat文件，`编辑`即可编辑源代码
 ```batch
 set driverfloder86=\\192.168.0.10\xxx\001-安装包\HP_Color_LaserJet_Pro_MFP_M277\hpne3B2A4_x86.inf
 set driverfloder64=\\192.168.0.10\xxx\001-安装包\HP_Color_LaserJet_Pro_MFP_M277\hpne3B2A4_x64.inf
