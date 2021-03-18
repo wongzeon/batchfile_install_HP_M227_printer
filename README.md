@@ -1,2 +1,29 @@
-# batchfile_install_printer
-Windows系统下批处理自动安装打印机（惠普MFP M277）
+### 说明
+日常工作的时候，经常需要帮同事安装打印机程序，手动对每台计算机进行操作十分繁琐
+为此制作了这个批处理脚本，用于在Windows系统下快速安装打印机
+每个同事仅需双击即可完成打印机安装，并生成打印机的扫描目录
+
+### 必备条件
++ 系统：Windows7 ~ Windows10
+  - 共享：提供驱动的计算机已建立局域网共享
+  - 权限：其他计算机可访问共享
+  - 网络：打印机和需要安装的计算机应在同一网段
++ 型号：HP Color LaserJet Pro MFP M277 PCL6
+  - 驱动：有对应型号的打印机驱动文件
+
+### 开始使用
+将bat文件下载下来后，点击`右键`，`编辑`即可编辑源代码
+如果打印机是必备条件中同型号的，则仅需修改`驱动路径`
+```batch
+set driverfloder86=\\192.168.0.10\xxx\001-安装包\HP_Color_LaserJet_Pro_MFP_M277\hpne3B2A4_x86.inf
+set driverfloder64=\\192.168.0.10\xxx\001-安装包\HP_Color_LaserJet_Pro_MFP_M277\hpne3B2A4_x64.inf
+```
+将代码中的`192.168.0.10`和`\xxx\001-安装包\HP_Color_LaserJet_Pro_MFP_M277\`替换（Ctrl+H）成建立共享的计算机IP及共享路径
+保存后，双击运行即可
+
+如果打印机是其他型号的，则需参照上方进行修改驱动路径，并在路径中放入驱动文件，最后修改打印机对应名称
+```batch
+for /f "tokens=2 delims=[]" %%a in ('ping -n 1 NPIBB7209^|findstr "Ping"') do (
+```
+将代码中的`NPIBB7209`替换为打印机对应名称。
+名称可在已安装打印机的计算机内，`控制面板`→`硬件和声音`→`设备和打印机`中查看
